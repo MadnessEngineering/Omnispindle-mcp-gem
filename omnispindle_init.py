@@ -161,18 +161,18 @@ def validate_project_name(project: str) -> str:
         "madness_interactive", "omnispindle", "swarmonomicon",
         "todomill_projectorium", "regressiontestkit", "dirname", "repo_name"
     ]
-    
+
     project_lower = project.lower()
-    
+
     # Direct match
     if project_lower in known_projects:
         return project_lower
-    
+
     # Partial matching for common variations
     for known in known_projects:
         if project_lower in known or known in project_lower:
             return known
-    
+
     # Default fallback
     return "madness_interactive"
 
@@ -187,4 +187,4 @@ AVAILABLE_TOOLS = {
     "search_lessons": search_lessons_tool,
     "mqtt_publish": mqtt_publish_tool,
     "mqtt_get": mqtt_get_tool,
-} 
+}
