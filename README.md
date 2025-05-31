@@ -68,28 +68,65 @@ mqtt_get_tool(topic) # sub -C(ount) 1 to get a single message
 ## Supported Projects
 
 The system validates and works with these projects:
-- `madness_interactive` - Main project repository
-- `omnispindle` - MCP todo server
-- `swarmonomicon` - Rust-based agent system
-- `todomill_projectorium` - Task processing pipeline
-- `regressiontestkit` - Testing framework
- scope.availableProjects = [
-  "regressiontestkit",
+
+### 🌟 Core Ecosystem Projects
+- **`madness_interactive`** - Parent Project of chaos - Main project repository
+- **`omnispindle`** - MCP server for Managing AI todo list in python
+- **`swarmonomicon`** - Todo worker and generation project in rust
+- **`todomill_projectorium`** - Todo list management Dashboard on Node-red
+
+### 🧪 Testing & Quality Assurance
+- **`regressiontestkit`** - Parent repo for Work projects. Balena device testing in python
+- **`quality_assurance`** - Quality assurance tasks
+
+### 🖥️ Automation & Desktop Tools
+- **`hammerspoon`** - MacOS automation and workspace management
+- **`hammerghost`** - MacOS automation menu in hammerspoon based on eventghost
+- **`eventghost`** - Event handling and monitoring automation. Being rewritten in Rust
+- **`eventghost-rust`** - Rust rewrite of EventGhost automation system
+- **`tinker`** - Browser testing automation framework in Rust
+
+### 📱 Mobile & Device Management
+- **`cogwyrm`** - Mobile app for Tasker interfacing with madness network
+- **`balena_device_management`** - Device deployment and management tasks
+
+### 🚀 Infrastructure & Deployment
+- **`docker_implementation`** - Tasks todo with docker and deployment
+- **`fastmcp`** - FastMCP server implementations and templates
+- **`lab_management`** - Lab management general project
+
+### 📚 Documentation & Knowledge
+- **`documentation`** - Documentation for all projects
+- **`spindlewrit`** - Writing and documentation project
+
+### 🌐 Web & Frontend
+- **`inventorium`** - Madnessinteractive.cc website and Todo Dashboard - React
+
+### 📋 Available Projects Array
+```javascript
+scope.availableProjects = [
   "madness_interactive",
   "omnispindle",
   "swarmonomicon",
-  "balena_device_management",
-  "cogwyrm",
-  "docker_implementation",
-  "documentation",
-  "eventghost-rust",
-  "fastmcp",
-  "hammerghost",
-  "hammerspoon",
+  "todomill_projectorium",
+  "regressiontestkit",
   "quality_assurance",
-  "inventorium",
-  "spindlewrit"
+  "hammerspoon",
+  "hammerghost",
+  "eventghost",
+  "eventghost-rust",
+  "tinker",
+  "cogwyrm",
+  "balena_device_management",
+  "docker_implementation",
+  "fastmcp",
+  "lab_management",
+  "documentation",
+  "spindlewrit",
+  "inventorium"
 ]
+```
+
 ## Data Structures
 
 ### Todo Item Format
