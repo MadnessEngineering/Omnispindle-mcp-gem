@@ -1,99 +1,67 @@
-# Omnispindle CLI Bridge
+# Omnispindle CLI Bridge - Gemini Knowledge Repository
 
-A streamlined interface for integrating Omnispindle MCP todo server capabilities with external systems, particularly designed for Gemini gem integration.
+A curated collection of documentation and code examples for integrating Omnispindle MCP todo server capabilities with Gemini gems. This repository serves as a clean, organized knowledge base that can be fed directly into Gemini's interface.
 
-## Quick Start
+## Purpose
 
-### Installation
-```bash
-pip install -r requirements.txt
-```
+This project houses the essential files and documentation needed to understand and integrate with the Omnispindle ecosystem. It's designed to be fed into Gemini gems as a complete knowledge package, providing:
 
-### Environment Setup
-```bash
-# .env file
-MONGODB_URI=mongodb://localhost:27017
-MONGODB_DB=todo_app
-MQTT_BROKER=localhost:1883
-```
+- Clean function signatures and interfaces
+- Comprehensive documentation
+- Usage examples and patterns
+- Project validation logic
+- Data structure definitions
 
-### Basic Usage
+## Repository Contents
+
+### 📋 Core Interface Files
+- **`omnispindle_init.py`** - Clean async function signatures for MCP integration
+- **`tools_summary.py`** - Key function signatures and validation logic
+- **`requirements.txt`** - Dependencies for understanding the ecosystem
+
+### 📚 Documentation Files
+- **`README_Omnispindle.txt`** - Original Omnispindle project documentation
+- **`README_Swarmonomicon.txt`** - Swarmonomicon project overview
+- **`project_overview.txt`** - Comprehensive system architecture
+
+### 🎯 For Gemini Integration
+
+When creating a Gemini gem that needs to interact with the Omnispindle ecosystem, feed these files to provide context on:
+
+1. **Available Functions**: Todo management, lessons learned, MQTT communication
+2. **Project Validation**: Supported projects and naming conventions
+3. **Data Formats**: Expected input/output structures
+4. **Integration Patterns**: How to properly interface with the MCP server
+
+## Key Functions Available
+
+### Todo Management
 ```python
-from omnispindle_init import add_todo_tool, query_todos_tool
-
-# Add a todo
-result = await add_todo_tool(
-    description="Implement new feature",
-    project="omnispindle",
-    priority="High"
-)
-
-# Query todos
-todos = await query_todos_tool(
-    query_or_filter={"status": "pending"},
-    limit=10
-)
-```
-
-## Core Features
-
-### 🎯 Todo Management
-- **Project Validation**: Automatic validation against known projects
-- **Priority System**: Low/Medium/High priority levels
-- **Status Tracking**: Complete workflow management
-- **Agent Routing**: Target specific processing agents
-
-### 📚 Knowledge Base
-- **Lessons Learned**: Store and search technical knowledge
-- **Tag-based Organization**: Categorize by technology/language
-- **Full-text Search**: Query across all content
-
-### 🔄 Real-time Integration
-- **MQTT Messaging**: Publish/subscribe to task updates
-- **WebSocket Support**: Live communication channels
-- **Event Broadcasting**: Real-time status updates
-
-## API Reference
-
-### Todo Operations
-```python
-# Add todo
 add_todo_tool(description, project, priority="Medium", target_agent="user", metadata=None)
-
-# Query todos
 query_todos_tool(query_or_filter=None, fields_or_projection=None, limit=100)
-
-# Update todo
 update_todo_tool(todo_id, updates)
-
-# Mark complete
 mark_todo_complete_tool(todo_id)
-
-# List by status
 list_todos_by_status_tool(status, limit=100)
+list_project_todos_tool(project, limit=5)
 ```
 
-### Lesson Management
+### Knowledge Base
 ```python
-# Add lesson
 add_lesson_tool(language, topic, lesson_learned, tags=None)
-
-# Search lessons
 search_lessons_tool(query, fields=None, limit=100)
+list_lessons_tool(limit=100)
+get_lesson_tool(lesson_id)
 ```
 
 ### MQTT Communication
 ```python
-# Publish message
 mqtt_publish_tool(topic, message, retain=False)
-
-# Get latest message
 mqtt_get_tool(topic)
 ```
 
 ## Supported Projects
 
-The bridge validates and normalizes project names for:
+The system validates and works with these projects:
 - `madness_interactive` - Main project repository
 - `omnispindle` - MCP todo server
 - `swarmonomicon` - Rust-based agent system
@@ -102,9 +70,9 @@ The bridge validates and normalizes project names for:
 - `dirname` - Directory utilities
 - `repo_name` - Generic repository
 
-## Data Formats
+## Data Structures
 
-### Todo Item
+### Todo Item Format
 ```json
 {
   "id": "unique_id",
@@ -122,7 +90,7 @@ The bridge validates and normalizes project names for:
 }
 ```
 
-### Lesson Item
+### Lesson Item Format
 ```json
 {
   "id": "unique_id",
@@ -134,107 +102,59 @@ The bridge validates and normalizes project names for:
 }
 ```
 
-## Integration Examples
+## Usage in Gemini Gems
 
-### Gemini Gem Integration
-```python
-# In your gem
-from omnispindle_cli_bridge import AVAILABLE_TOOLS
+When creating a gem that needs MCP integration:
 
-# Use any tool
-result = await AVAILABLE_TOOLS["add_todo"](
-    "Implement OAuth integration",
-    "my_project",
-    "High"
-)
+1. **Feed this entire repository** to Gemini for context
+2. **Reference the function signatures** in `omnispindle_init.py`
+3. **Use the validation logic** from `tools_summary.py`
+4. **Follow the data formats** specified above
+5. **Understand the ecosystem** through the documentation files
+
+## Environment Context
+
+The MCP server expects these environment variables:
+```bash
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DB=todo_app
+MQTT_BROKER=localhost:1883
 ```
 
-### MQTT Task Distribution
-```python
-# Publish task to specific agent
-await mqtt_publish_tool(
-    "mcp/todo/greeter",
-    json.dumps({
-        "description": "Welcome new user",
-        "priority": "Medium"
-    })
-)
-```
+## Error Handling Pattern
 
-### Knowledge Base Queries
-```python
-# Search for Python lessons
-lessons = await search_lessons_tool(
-    "python async",
-    fields=["topic", "lesson_learned"],
-    limit=5
-)
-```
+All functions return standardized responses:
 
-## Error Handling
-
-All functions return standardized JSON responses:
-
-### Success Response
+**Success:**
 ```json
-{
-  "success": true,
-  "message": "Operation completed",
-  "data": { ... }
-}
+{"success": true, "message": "Operation completed", "data": {...}}
 ```
 
-### Error Response
+**Error:**
 ```json
-{
-  "success": false,
-  "error": "validation_error",
-  "message": "Invalid project name"
-}
+{"success": false, "error": "validation_error", "message": "Invalid project name"}
 ```
 
-## Development
+## Example Gemini Gem Usage
 
-### Running Tests
-```bash
-pytest tests/ -v
-```
-
-### Code Formatting
-```bash
-black omnispindle_init.py tools_summary.py
-```
-
-### Type Checking
-```bash
-mypy omnispindle_init.py
-```
-
-## Architecture
-
-The bridge sits between external systems (like Gemini gems) and the Omnispindle/Swarmonomicon ecosystem:
+When building a gem, you might use this knowledge like:
 
 ```
-[Gemini Gem] → [CLI Bridge] → [MongoDB/MQTT] → [Swarmonomicon Agents]
+Your job is to act as a syntax bridge for my CLI paste in based MCP 
+implementation for working with AIs that don't have native MCP access. You 
+have access to an MCP server and understand the command line oriented 
+JSON syntax as demonstrated in the examples provided by the user.
+
+Available functions:
+- add_todo_tool(description, project, priority, target_agent, metadata)
+- query_todos_tool(query_or_filter, fields_or_projection, limit)
+- search_lessons_tool(query, fields, limit)
+- mqtt_publish_tool(topic, message, retain)
+
+Supported projects: madness_interactive, omnispindle, swarmonomicon, 
+todomill_projectorium, regressiontestkit, dirname, repo_name
 ```
 
-Key design principles:
-- **Clean Interfaces**: Simple async functions with type hints
-- **Input Validation**: Automatic sanitization and normalization
-- **Error Resilience**: Graceful handling of invalid inputs
-- **Consistent Responses**: Standardized JSON format for all operations
+---
 
-## License
-
-MIT License - see LICENSE file for details.
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Submit a pull request
-
-For more information about the broader ecosystem, see:
-- [Omnispindle Documentation](../Omnispindle/README.md)
-- [Swarmonomicon Project](../Swarmonomicon/README.md) 
+**Note**: This is a knowledge repository, not executable code. Use these files to understand the Omnispindle ecosystem when building Gemini gems that need MCP integration. 
