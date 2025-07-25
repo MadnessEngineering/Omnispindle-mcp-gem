@@ -65,7 +65,7 @@ You can add todos using FastMCP in several ways:
    from fastmcp import FastMCPClient
 
    client = FastMCPClient()
-   response = await client.call_tool("add_todo", {
+   response = await client.call("add_todo", {
        "description": "Example todo",
        "priority": "high",  # optional, defaults to "medium"
        "target_agent": "user"  # optional, defaults to "user"

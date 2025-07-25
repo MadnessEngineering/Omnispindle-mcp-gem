@@ -43,26 +43,26 @@ When creating a Gemini gem that needs to interact with the Omnispindle ecosystem
 
 ### Todo Management
 ```python
-add_todo_tool(description, project, priority="Medium", target_agent="user", metadata=None)
-query_todos_tool(query_or_filter=None, fields_or_projection=None, limit=100)
-update_todo_tool(todo_id, updates)
-mark_todo_complete_tool(todo_id)
-list_todos_by_status_tool(status, limit=100)
-list_project_todos_tool(project, limit=5)
+add_todo(description, project, priority="Medium", target_agent="user", metadata=None)
+query_todos(query_or_filter=None, fields_or_projection=None, limit=100)
+update_todo(todo_id, updates)
+mark_todo_complete(todo_id)
+list_todos_by_status(status, limit=100)
+list_project_todos(project, limit=5)
 ```
 
 ### Knowledge Base
 ```python
-add_lesson_tool(language, topic, lesson_learned, tags=None)
-search_lessons_tool(query, fields=None, limit=100)
-list_lessons_tool(limit=100)
-get_lesson_tool(lesson_id)
+add_lesson(language, topic, lesson_learned, tags=None)
+search_lessons(query, fields=None, limit=100)
+list_lessons(limit=100)
+get_lesson(lesson_id)
 ```
 
 ### MQTT Communication
 ```python
-mqtt_publish_tool(topic, message, retain=False)
-mqtt_get_tool(topic) # sub -C(ount) 1 to get a single message
+mqtt_publish(topic, message, retain=False)
+mqtt_get(topic) # sub -C(ount) 1 to get a single message
 ```
 
 ## Supported Projects
