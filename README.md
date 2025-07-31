@@ -1,6 +1,13 @@
-# Omnispindle CLI Bridge - Gemini Knowledge Repository
+# Omnispindle CLI Bridge - Gemini Knowledge Repository for generating mad quests for your swarm
 
 A curated collection of documentation and code examples for integrating Omnispindle MCP todo server capabilities with Gemini via gems. At the time of writing, Gemini does not support MCP integration, so this repository serves as a bridge to allow Gemini(or any other LLM) to interact with the Omnispindle ecosystem via a little copy-paste.
+
+## AI Model Integration Docs
+
+- [Claude Agents](./README_Claude.md)
+- [OpenAI GPTs](./README_GPT.md)
+- [Goose AI](./README_Goose.md)
+- [Gemini Gems](./README.md) (You are here)
 
 ## Purpose
 
